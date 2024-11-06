@@ -1,0 +1,31 @@
+from flask import Flask, request, jsonify
+import requests
+
+app = Flask(__name__)
+
+@app.route('/create-address', methods=['POST'])
+def create_address():
+    data = request.json
+    api_key = data.get('apiKey')
+    name = data.get('name')
+    ip = data.get('ip')
+
+    url = 'https://<FORTIGATE-IP>/api/v2/cmdb/firewall/address'
+    headers = {
+        'Authorization': f'Bearer {api_key}',
+        'Content-Type': 'application/json'
+    }
+    payload = {
+        'name': name,
+        'subnet': ip
+    }
+
+    response = requests.post(url, headers=headers, json=payload, verify=False)
+
+    if response.status_code == 200:
+        return jsonify({'message': 'Address object created successfully!'})
+    else:
+        return jsonify({'message': 'Failed to create address object.', 'details': response.text}), 400
+
+if __name__ == '__main__':
+    app.run(debug=True)
