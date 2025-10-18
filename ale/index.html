@@ -295,17 +295,18 @@
                 <div class="form-group">
                     <label class="required">Switch Typ</label>
                     <select id="switchType">
-                        <option value="10">10 Port</option>
-                        <option value="24" selected>24 Port</option>
-                        <option value="48">48 Port</option>
+                        <option value="10">OS6360-P10 (10 Port)</option>
+                        <option value="24" selected>OS6360-P24 (24 Port)</option>
+                        <option value="48">OS6360-P48 (48 Port)</option>
                     </select>
+                    <small style="color: #666;">Port-Konfiguration wird automatisch angepasst</small>
                 </div>
 
                 <h3 style="margin-top: 30px;">Management Interface</h3>
 
                 <div class="form-group">
                     <label class="required">Interface Name</label>
-                    <input type="text" id="ipInterfaceName" placeholder="z.B. VL1004_Network_MGMT_IN_CORE">
+                    <input type="text" id="ipInterfaceName" placeholder="z.B. VL1004_Network_MGMT_IN_CORE" value="VL1004_Network_MGMT_IN_CORE">
                 </div>
 
                 <div class="ip-interface-fields">
@@ -353,7 +354,7 @@
                 <div id="domainSection" style="display: none;">
                     <div class="form-group">
                         <label>Domain Name</label>
-                        <input type="text" id="domainName" placeholder="domain.local" value="domain.local">
+                        <input type="text" id="domainName" placeholder="domain.local">
                     </div>
                     <div class="form-group">
                         <label>Name Server IP</label>
@@ -535,6 +536,48 @@
             singleSection.style.display = 'block';
             lacpSection.style.display = 'none';
         }
+    }
+
+    function updateSwitchDefaults() {
+        const switchType = document.getElementById('switchType').value;
+        const enableLacp = document.getElementById('enableLacp').checked;
+        
+        let accessPorts = '';
+        let uplinkPorts = '';
+        let lacpPorts = '';
+        let uplinkDescriptions = '';
+        
+        if (switchType === '10') {
+            accessPorts = '1-8';
+            uplinkPorts = '11,12';
+            lacpPorts = '11,12';
+            uplinkDescriptions = '11:Uplink to Core-SW Port 1/1/X\n12:Uplink to Core-SW Port 1/1/X';
+        } else if (switchType === '24') {
+            accessPorts = '1-24';
+            uplinkPorts = '25,26';
+            lacpPorts = '25,26';
+            uplinkDescriptions = '25:Uplink to Core-SW Port 1/1/X\n26:Uplink to Core-SW Port 1/1/X';
+        } else if (switchType === '48') {
+            accessPorts = '1-48';
+            uplinkPorts = '49,50';
+            lacpPorts = '49,50';
+            uplinkDescriptions = '49:Uplink to Core-SW Port 1/1/X\n50:Uplink to Core-SW Port 1/1/X';
+        }
+        
+        document.getElementById('uplinkPorts').value = uplinkPorts;
+        document.getElementById('uplinkDescriptions').value = uplinkDescriptions;
+        document.getElementById('lacpPorts').value = lacpPorts;
+        
+        const portConfigBuilder = document.getElementById('portConfigBuilder');
+        portConfigBuilder.innerHTML = '';
+        
+        const div = document.createElement('div');
+        div.className = 'port-config';
+        div.innerHTML = '<div class="port-item"><input type="text" placeholder="1-10" title="Port Range" value="' + accessPorts + '"><input type="text" placeholder="Alias (optional)" title="Port Alias" value="Access Port"><select title="Speed"><option value="">Auto</option><option value="10">10 Mbps</option><option value="100">100 Mbps</option><option value="1000">1000 Mbps</option></select><input type="number" placeholder="VLAN" min="1" max="4094" title="VLAN ID" value="400"><button class="btn btn-small btn-danger" type="button">×</button></div>';
+        portConfigBuilder.appendChild(div);
+        div.querySelector('button').addEventListener('click', function() {
+            this.closest('.port-config').remove();
+        });
     }
 
     function addVlan() {
@@ -1047,6 +1090,7 @@
     document.getElementById('enableSyslog').addEventListener('change', toggleSyslog);
     document.getElementById('enableLoopbackDetection').addEventListener('change', toggleLoopbackDetection);
     document.getElementById('enableLacp').addEventListener('change', toggleLacp);
+    document.getElementById('switchType').addEventListener('change', updateSwitchDefaults);
     document.getElementById('addVlanBtn').addEventListener('click', addVlan);
     document.getElementById('addPortBtn').addEventListener('click', addPortConfig);
     document.getElementById('generateBtn').addEventListener('click', generateConfig);
@@ -1059,7 +1103,7 @@
         });
     });
 
-    addPortConfig();
+    updateSwitchDefaults();
 })();
     </script>
 </body>
