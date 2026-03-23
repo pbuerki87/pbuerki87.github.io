@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -46,24 +47,24 @@
 :root.light input[type=text],
 :root.light input[type=password],
 :root.light select {
-  background: #ffffff;
-  border-color: #c0cdd9;
-  color: #1a2535;
+background: #ffffff;
+border-color: #c0cdd9;
+color: #1a2535;
 }
 :root.light input[type=text]:focus,
 :root.light input[type=password]:focus,
 :root.light select:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 2px rgba(26,127,212,.12);
+border-color: var(–blue);
+box-shadow: 0 0 0 2px rgba(26,127,212,.12);
 }
 :root.light input::placeholder { color: #a0b0c0; }
 :root.light select option { background: #ffffff; color: #1a2535; }
 
 /* Header inputs */
 :root.light .conn-inputs input {
-  background: #f0f4f8;
-  border-color: #c0cdd9;
-  color: #1a2535;
+background: #f0f4f8;
+border-color: #c0cdd9;
+color: #1a2535;
 }
 :root.light .conn-inputs input::placeholder { color: #8a9eb5; }
 
@@ -95,9 +96,9 @@
 /* Badges & toolbar */
 :root.light .badge        { background: #eef2f7; border-color: #c8d5e0; color: #4d6478; }
 :root.light .btn-outline  { background: #f0f4f8; border-color: #c0cdd9; color: #4d6478; }
-:root.light .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+:root.light .btn-outline:hover { border-color: var(–blue); color: var(–blue); }
 :root.light .btn-conn     { background: #eef2f7; border-color: #c0cdd9; color: #1a2535; }
-:root.light .btn-conn:hover { border-color: var(--blue); color: var(--blue); }
+:root.light .btn-conn:hover { border-color: var(–blue); color: var(–blue); }
 :root.light .btn-theme    { background: #eef2f7; border-color: #c0cdd9; color: #4d6478; }
 
 /* Log */
@@ -111,7 +112,7 @@
 /* Tabs */
 :root.light .panel-tabs   { background: #ffffff; border-bottom-color: #d1dce8; }
 :root.light .tab          { color: #8a9eb5; }
-:root.light .tab.active   { color: var(--blue); border-bottom-color: var(--blue); }
+:root.light .tab.active   { color: var(–blue); border-bottom-color: var(–blue); }
 :root.light .tab:hover:not(.active) { color: #1a2535; }
 
 /* Right panel */
@@ -123,7 +124,7 @@
 
 /* icon-btn (delete) */
 :root.light .icon-btn     { border-color: #c8d5e0; color: #8a9eb5; }
-:root.light .icon-btn:hover { border-color: var(--red); color: var(--red); }
+:root.light .icon-btn:hover { border-color: var(–red); color: var(–red); }
 
 /* Empty state */
 :root.light .empty-state  { border-color: #c8d5e0; color: #8a9eb5; }
@@ -138,6 +139,14 @@
 :root.light .progress-bar { background: #d1dce8; }
 :root.light .progress-label { color: #8a9eb5; }
 
+/* Action buttons */
+:root.light .btn-run      { background: #007a50; color: #ffffff; }
+:root.light .btn-run:hover{ background: #006040; color: #ffffff; }
+:root.light .btn-run:disabled { background: #b0d4c4; color: #7aaa90; }
+:root.light .btn-add      { background: #007a50; color: #ffffff; }
+:root.light .btn-add:hover{ background: #006040; }
+:root.light .btn-add:disabled { background: #b0d4c4; color: #7aaa90; }
+
 /* Conn badge */
 :root.light #conn-badge   { border-color: #c0cdd9; color: #8a9eb5; background: #f0f4f8; }
 :root.light #conn-badge.ok  { background: #e6faf3; border-color: #6ecfa0; color: #006845; }
@@ -148,126 +157,126 @@
 :root.light .form-footer  { background: #ffffff; border-top-color: #d1dce8; }
 
 /* Logo */
-:root.light .logo         { color: var(--accent); }
+:root.light .logo         { color: var(–accent); }
 :root.light .logo-sep     { background: #d1dce8; }
 
 /* Header */
 :root.light header        { background: #ffffff; border-bottom-color: #d1dce8; }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden}
-body{font-family:'Geist',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.5}
+body{font-family:‘Geist’,sans-serif;background:var(–bg);color:var(–text);font-size:13px;line-height:1.5}
 
 /* ── Header ── */
 header{
-  height:52px;background:var(--panel);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;
+height:52px;background:var(–panel);border-bottom:1px solid var(–border);
+display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;
 }
 .logo{
-  font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;
-  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
-  display:flex;align-items:center;gap:8px;
+font-family:‘Geist Mono’,monospace;font-size:12px;font-weight:600;
+color:var(–accent);letter-spacing:.12em;text-transform:uppercase;
+display:flex;align-items:center;gap:8px;
 }
-.logo-sep{width:1px;height:18px;background:var(--border2)}
+.logo-sep{width:1px;height:18px;background:var(–border2)}
 .conn-area{display:flex;align-items:center;gap:8px;margin-left:auto}
 .conn-inputs{display:flex;gap:6px}
 .conn-inputs input{
-  background:var(--surface);border:1px solid var(--border2);border-radius:6px;
-  padding:5px 10px;color:var(--text);font-family:'Geist Mono',monospace;font-size:11px;
-  outline:none;transition:border-color .15s;width:220px;
+background:var(–surface);border:1px solid var(–border2);border-radius:6px;
+padding:5px 10px;color:var(–text);font-family:‘Geist Mono’,monospace;font-size:11px;
+outline:none;transition:border-color .15s;width:220px;
 }
-.conn-inputs input:focus{border-color:var(--blue)}
-.conn-inputs input::placeholder{color:var(--muted)}
+.conn-inputs input:focus{border-color:var(–blue)}
+.conn-inputs input::placeholder{color:var(–muted)}
 
 #conn-badge{
-  font-family:'Geist Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;
-  border:1px solid var(--border2);color:var(--muted);display:flex;align-items:center;gap:5px;
-  white-space:nowrap;transition:all .3s;
+font-family:‘Geist Mono’,monospace;font-size:10px;padding:4px 10px;border-radius:20px;
+border:1px solid var(–border2);color:var(–muted);display:flex;align-items:center;gap:5px;
+white-space:nowrap;transition:all .3s;
 }
-#conn-badge.ok {border-color:#1a5c37;background:#061a10;color:var(--accent)}
-#conn-badge.err{border-color:#5c1a1a;background:#1a0606;color:var(--red)}
+#conn-badge.ok {border-color:#1a5c37;background:#061a10;color:var(–accent)}
+#conn-badge.err{border-color:#5c1a1a;background:#1a0606;color:var(–red)}
 #conn-badge .dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:6px;
-  padding:6px 14px;border-radius:6px;border:none;cursor:pointer;
-  font-family:'Geist',sans-serif;font-size:12px;font-weight:500;transition:all .15s;white-space:nowrap;
+display:inline-flex;align-items:center;justify-content:center;gap:6px;
+padding:6px 14px;border-radius:6px;border:none;cursor:pointer;
+font-family:‘Geist’,sans-serif;font-size:12px;font-weight:500;transition:all .15s;white-space:nowrap;
 }
-.btn-conn{background:var(--surface2);border:1px solid var(--border2);color:var(--text)}
-.btn-conn:hover{border-color:var(--blue);color:var(--blue)}
+.btn-conn{background:var(–surface2);border:1px solid var(–border2);color:var(–text)}
+.btn-conn:hover{border-color:var(–blue);color:var(–blue)}
 .btn-theme{
-  width:32px;height:32px;border-radius:6px;border:1px solid var(--border2);
-  background:var(--surface2);color:var(--label);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:15px;
-  transition:all .15s;flex-shrink:0;
+width:32px;height:32px;border-radius:6px;border:1px solid var(–border2);
+background:var(–surface2);color:var(–label);cursor:pointer;
+display:flex;align-items:center;justify-content:center;font-size:15px;
+transition:all .15s;flex-shrink:0;
 }
-.btn-theme:hover{border-color:var(--blue);color:var(--blue)}
+.btn-theme:hover{border-color:var(–blue);color:var(–blue)}
 
 /* ── Layout ── */
 .workspace{
-  display:grid;grid-template-columns:500px 1fr;height:calc(100vh - 52px);overflow:hidden;
+display:grid;grid-template-columns:500px 1fr;height:calc(100vh - 52px);overflow:hidden;
 }
 
 /* ── Left Panel: Form ── */
 .form-panel{
-  background:var(--panel);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;
+background:var(–panel);border-right:1px solid var(–border);
+display:flex;flex-direction:column;overflow:hidden;
 }
 .form-scroll{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
 .form-footer{
-  padding:12px 16px;border-top:1px solid var(--border);background:var(--panel);
-  display:flex;gap:8px;
+padding:12px 16px;border-top:1px solid var(–border);background:var(–panel);
+display:flex;gap:8px;
 }
 .btn-add{
-  flex:1;background:var(--accent);color:#060c0a;font-weight:600;font-size:13px;
-  padding:9px;border-radius:var(--radius);border:none;cursor:pointer;
-  font-family:'Geist',sans-serif;transition:all .15s;
+flex:1;background:var(–accent);color:#060c0a;font-weight:600;font-size:13px;
+padding:9px;border-radius:var(–radius);border:none;cursor:pointer;
+font-family:‘Geist’,sans-serif;transition:all .15s;
 }
 .btn-add:hover{background:#00ffb3}
 .btn-add:disabled{background:#0d2a1e;color:#1a4030;cursor:not-allowed}
 
 /* ── Section Cards ── */
-.section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.section{background:var(–surface);border:1px solid var(–border);border-radius:var(–radius);overflow:hidden}
 .section-head{
-  padding:9px 14px;display:flex;align-items:center;gap:8px;
-  border-bottom:1px solid var(--border);background:var(--surface2);
+padding:9px 14px;display:flex;align-items:center;gap:8px;
+border-bottom:1px solid var(–border);background:var(–surface2);
 }
 .section-icon{
-  width:20px;height:20px;border-radius:4px;display:flex;align-items:center;
-  justify-content:center;font-size:11px;flex-shrink:0;
+width:20px;height:20px;border-radius:4px;display:flex;align-items:center;
+justify-content:center;font-size:11px;flex-shrink:0;
 }
-.icon-device {background:#0d2a3d;color:var(--blue)}
-.icon-iface  {background:#0d2a1e;color:var(--accent)}
-.icon-net    {background:#1e1a2d;color:var(--violet)}
-.icon-mac    {background:#2a1d0a;color:var(--amber)}
-.section-title{font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--label)}
+.icon-device {background:#0d2a3d;color:var(–blue)}
+.icon-iface  {background:#0d2a1e;color:var(–accent)}
+.icon-net    {background:#1e1a2d;color:var(–violet)}
+.icon-mac    {background:#2a1d0a;color:var(–amber)}
+.section-title{font-family:‘Geist Mono’,monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(–label)}
 .section-body{padding:14px;display:flex;flex-direction:column;gap:10px}
 .row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 .field{display:flex;flex-direction:column;gap:4px}
-.field label{font-size:11px;color:var(--label);font-weight:500;letter-spacing:.02em}
-.field label .req{color:var(--red);margin-left:2px}
-.field label .opt{color:var(--muted);font-size:10px;margin-left:4px}
+.field label{font-size:11px;color:var(–label);font-weight:500;letter-spacing:.02em}
+.field label .req{color:var(–red);margin-left:2px}
+.field label .opt{color:var(–muted);font-size:10px;margin-left:4px}
 input[type=text],input[type=password],select{
-  width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:6px;
-  padding:7px 10px;color:var(--text);font-family:'Geist Mono',monospace;font-size:11px;
-  outline:none;transition:border-color .15s,box-shadow .15s;
+width:100%;background:var(–bg);border:1px solid var(–border2);border-radius:6px;
+padding:7px 10px;color:var(–text);font-family:‘Geist Mono’,monospace;font-size:11px;
+outline:none;transition:border-color .15s,box-shadow .15s;
 }
-input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(59,158,255,.1)}
-input::placeholder{color:var(--muted)}
-select option{background:var(--surface2)}
-.hint-text{font-size:10px;color:var(--muted);margin-top:2px}
+input:focus,select:focus{border-color:var(–blue);box-shadow:0 0 0 2px rgba(59,158,255,.1)}
+input::placeholder{color:var(–muted)}
+select option{background:var(–surface2)}
+.hint-text{font-size:10px;color:var(–muted);margin-top:2px}
 
 /* ── Right Panel ── */
 .right-panel{display:flex;flex-direction:column;overflow:hidden}
 .panel-tabs{
-  display:flex;border-bottom:1px solid var(--border);background:var(--panel);
-  padding:0 16px;gap:2px;flex-shrink:0;
+display:flex;border-bottom:1px solid var(–border);background:var(–panel);
+padding:0 16px;gap:2px;flex-shrink:0;
 }
 .tab{
-  font-family:'Geist Mono',monospace;font-size:11px;padding:11px 14px;cursor:pointer;
-  color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;
+font-family:‘Geist Mono’,monospace;font-size:11px;padding:11px 14px;cursor:pointer;
+color:var(–muted);border-bottom:2px solid transparent;transition:all .15s;
 }
-.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
-.tab:hover:not(.active){color:var(--text)}
+.tab.active{color:var(–blue);border-bottom-color:var(–blue)}
+.tab:hover:not(.active){color:var(–text)}
 .tab-content{display:none;flex:1;overflow-y:auto;padding:16px;flex-direction:column;gap:12px}
 .tab-content.active{display:flex}
 
@@ -275,106 +284,128 @@ select option{background:var(--surface2)}
 .queue-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .queue-toolbar-left{display:flex;align-items:center;gap:8px}
 .badge{
-  font-family:'Geist Mono',monospace;font-size:10px;padding:2px 8px;border-radius:10px;
-  background:var(--surface2);border:1px solid var(--border2);color:var(--label);
+font-family:‘Geist Mono’,monospace;font-size:10px;padding:2px 8px;border-radius:10px;
+background:var(–surface2);border:1px solid var(–border2);color:var(–label);
 }
 .toolbar-btns{display:flex;gap:6px}
 .btn-sm{padding:5px 12px;font-size:11px;border-radius:5px}
-.btn-outline{background:var(--surface);border:1px solid var(--border2);color:var(--label)}
-.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
-.btn-run{background:var(--accent);color:#060c0a;font-weight:600}
+.btn-outline{background:var(–surface);border:1px solid var(–border2);color:var(–label)}
+.btn-outline:hover{border-color:var(–blue);color:var(–blue)}
+.btn-run{background:var(–accent);color:#060c0a;font-weight:600}
 .btn-run:hover{background:#00ffb3}
 .btn-run:disabled{background:#0d2a1e;color:#1a4030;cursor:not-allowed}
 
 /* Progress */
 .progress-wrap{display:none}
-.progress-label{font-family:'Geist Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:4px}
-.progress-bar{height:2px;background:var(--border);border-radius:1px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--accent));border-radius:1px;transition:width .3s}
+.progress-label{font-family:‘Geist Mono’,monospace;font-size:10px;color:var(–muted);margin-bottom:4px}
+.progress-bar{height:2px;background:var(–border);border-radius:1px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(–blue),var(–accent));border-radius:1px;transition:width .3s}
 
 /* Queue items */
 #queue-list{display:flex;flex-direction:column;gap:6px}
 .queue-item{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:11px 14px;display:grid;grid-template-columns:1fr auto;gap:8px;
-  align-items:start;transition:border-color .2s;
+background:var(–surface);border:1px solid var(–border);border-radius:var(–radius);
+padding:11px 14px;display:grid;grid-template-columns:1fr auto;gap:8px;
+align-items:start;transition:border-color .2s;
 }
 .queue-item.success{border-color:#1a5c37;background:#050f09}
 .queue-item.error  {border-color:#5c1a1a;background:#0f0505}
-.queue-item.running{border-color:var(--blue);background:#050f1a}
-.queue-name{font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:var(--text)}
+.queue-item.running{border-color:var(–blue);background:#050f1a}
+.queue-name{font-family:‘Geist Mono’,monospace;font-size:12px;font-weight:600;color:var(–text)}
 .queue-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .queue-tag{
-  font-family:'Geist Mono',monospace;font-size:10px;padding:1px 7px;border-radius:4px;
-  border:1px solid var(--border2);color:var(--label);background:var(--surface2);
+font-family:‘Geist Mono’,monospace;font-size:10px;padding:1px 7px;border-radius:4px;
+border:1px solid var(–border2);color:var(–label);background:var(–surface2);
 }
-.queue-tag.tag-type  {border-color:#1a3d5c;color:var(--blue);background:#050f1a}
-.queue-tag.tag-iface {border-color:#0a2e1a;color:var(--accent);background:#030f07}
-.queue-tag.tag-ip    {border-color:#1e1028;color:var(--violet);background:#0a060f}
-.queue-tag.tag-mac   {border-color:#2a1d0a;color:var(--amber);background:#0f0a03}
-.queue-err{font-size:10px;color:var(--red);font-family:'Geist Mono',monospace;margin-top:4px}
+.queue-tag.tag-type  {border-color:#1a3d5c;color:var(–blue);background:#050f1a}
+.queue-tag.tag-iface {border-color:#0a2e1a;color:var(–accent);background:#030f07}
+.queue-tag.tag-ip    {border-color:#1e1028;color:var(–violet);background:#0a060f}
+.queue-tag.tag-mac   {border-color:#2a1d0a;color:var(–amber);background:#0f0a03}
+.queue-err{font-size:10px;color:var(–red);font-family:‘Geist Mono’,monospace;margin-top:4px}
 .queue-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 .queue-status{
-  font-family:'Geist Mono',monospace;font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;
+font-family:‘Geist Mono’,monospace;font-size:10px;padding:2px 8px;border-radius:10px;white-space:nowrap;
 }
-.queue-status.pending{background:var(--surface2);color:var(--muted)}
-.queue-status.success{background:#061a10;color:var(--accent);border:1px solid #1a5c37}
-.queue-status.error  {background:#1a0606;color:var(--red);border:1px solid #5c1a1a}
-.queue-status.running{background:#05101a;color:var(--blue);border:1px solid #1a3d5c}
+.queue-status.pending{background:var(–surface2);color:var(–muted)}
+.queue-status.success{background:#061a10;color:var(–accent);border:1px solid #1a5c37}
+.queue-status.error  {background:#1a0606;color:var(–red);border:1px solid #5c1a1a}
+.queue-status.running{background:#05101a;color:var(–blue);border:1px solid #1a3d5c}
 .icon-btn{
-  background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);
-  cursor:pointer;padding:3px 7px;font-size:11px;transition:all .15s;
+background:none;border:1px solid var(–border);border-radius:4px;color:var(–muted);
+cursor:pointer;padding:3px 7px;font-size:11px;transition:all .15s;
 }
-.icon-btn:hover{border-color:var(--red);color:var(--red)}
+.icon-btn:hover{border-color:var(–red);color:var(–red)}
 .empty-state{
-  text-align:center;padding:48px 24px;color:var(--muted);font-size:12px;
-  font-family:'Geist Mono',monospace;line-height:1.8;border:1px dashed var(--border);
-  border-radius:var(--radius);
+text-align:center;padding:48px 24px;color:var(–muted);font-size:12px;
+font-family:‘Geist Mono’,monospace;line-height:1.8;border:1px dashed var(–border);
+border-radius:var(–radius);
 }
 
 /* Log */
 #log-output{
-  background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:10px 12px;
-  font-family:'Geist Mono',monospace;font-size:10px;height:100%;min-height:300px;
-  overflow-y:auto;line-height:1.7;
+background:var(–bg);border:1px solid var(–border);border-radius:6px;padding:10px 12px;
+font-family:‘Geist Mono’,monospace;font-size:10px;height:100%;min-height:300px;
+overflow-y:auto;line-height:1.7;
 }
 .log-line{display:flex;gap:10px}
-.log-time{color:var(--muted);flex-shrink:0}
-.log-ok  {color:var(--accent)}
-.log-err {color:var(--red)}
-.log-info{color:var(--blue)}
-.log-warn{color:var(--amber)}
+.log-time{color:var(–muted);flex-shrink:0}
+.log-ok  {color:var(–accent)}
+.log-err {color:var(–red)}
+.log-info{color:var(–blue)}
+.log-warn{color:var(–amber)}
 
 /* Spinner */
 .spinner{
-  display:inline-block;width:11px;height:11px;border:2px solid var(--border2);
-  border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;
+display:inline-block;width:11px;height:11px;border:2px solid var(–border2);
+border-top-color:var(–blue);border-radius:50%;animation:spin .7s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* Toast */
 #toast{
-  position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--border2);
-  border-radius:var(--radius);padding:10px 16px;font-size:12px;max-width:320px;
-  opacity:0;transform:translateY(6px);transition:all .25s;pointer-events:none;z-index:999;
+position:fixed;bottom:20px;right:20px;background:var(–surface2);border:1px solid var(–border2);
+border-radius:var(–radius);padding:10px 16px;font-size:12px;max-width:320px;
+opacity:0;transform:translateY(6px);transition:all .25s;pointer-events:none;z-index:999;
 }
 #toast.show{opacity:1;transform:translateY(0)}
-#toast.toast-ok {border-color:#1a5c37;color:var(--accent)}
-#toast.toast-err{border-color:#5c1a1a;color:var(--red)}
+#toast.toast-ok {border-color:#1a5c37;color:var(–accent)}
+#toast.toast-err{border-color:#5c1a1a;color:var(–red)}
+
+/* CSV Table */
+#csv-table th{
+background:var(–surface2);color:var(–label);font-weight:500;
+padding:5px 10px;text-align:left;border-bottom:1px solid var(–border2);
+white-space:nowrap;font-size:10px;
+}
+#csv-table td{
+padding:5px 10px;border-bottom:1px solid var(–border);color:var(–text);
+font-size:10px;white-space:nowrap;
+}
+#csv-table tr:last-child td{border-bottom:none}
+#csv-table tr.csv-err td{background:#1a0606;color:var(–red)}
+#csv-table tr.csv-warn td{background:#1a1500;}
+#csv-dropzone.drag-over{border-color:var(–blue);background:rgba(59,158,255,.05);color:var(–blue)}
+:root.light #csv-table th{background:#eef2f7;color:#4d6478}
+:root.light #csv-table td{border-bottom-color:#e0e8f0;color:#1a2535}
+:root.light #csv-table tr.csv-err td{background:#fff0f0;color:#c04040}
+:root.light #csv-table tr.csv-warn td{background:#fffbe6;}
+:root.light #csv-dropzone.drag-over{border-color:#1a7fd4;background:rgba(26,127,212,.05)}
 
 /* Scrollbars */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb{background:var(–border2);border-radius:3px}
 
 /* Iface loading inline */
 .field-label-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
 .field-label-row label{margin:0}
 </style>
+
 </head>
 <body>
 
 <!-- ── Header ── -->
+
 <header>
   <div class="logo">
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor" opacity=".7"/><rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor"/><rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor"/><rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor" opacity=".5"/></svg>
@@ -388,191 +419,270 @@ select option{background:var(--surface2)}
       <input type="password" id="nb-pass" placeholder="Passwort" style="width:110px">
     </div>
 
-    <button class="btn btn-conn" onclick="testConnection()">
-      <span id="test-spinner" style="display:none" class="spinner"></span>
-      Verbinden
-    </button>
-    <button class="btn-theme" id="btn-theme" onclick="toggleTheme()" title="Hell/Dunkel wechseln">🌙</button>
-    <div id="conn-badge"><div class="dot"></div><span id="conn-text">Offline</span></div>
+```
+<button class="btn btn-conn" onclick="testConnection()">
+  <span id="test-spinner" style="display:none" class="spinner"></span>
+  Verbinden
+</button>
+<button class="btn-theme" id="btn-theme" onclick="toggleTheme()" title="Hell/Dunkel wechseln">🌙</button>
+<div id="conn-badge"><div class="dot"></div><span id="conn-text">Offline</span></div>
+```
+
   </div>
 </header>
 
 <!-- ── Workspace ── -->
+
 <div class="workspace">
 
   <!-- ── Left: Form Panel ── -->
+
   <div class="form-panel">
     <div class="form-scroll">
 
-      <!-- SECTION: Gerät -->
-      <div class="section">
-        <div class="section-head">
-          <div class="section-icon icon-device">⬡</div>
-          <div class="section-title">Gerät</div>
-        </div>
-        <div class="section-body">
-          <div class="row-2">
-            <div class="field">
-              <label>Name<span class="req">*</span></label>
-              <input type="text" id="f-name" placeholder="z.B. SW-CORE-01">
-            </div>
-            <div class="field">
-              <label>Seriennummer<span class="opt">optional</span></label>
-              <input type="text" id="f-serial" placeholder="SN-123456">
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Site<span class="req">*</span></label>
-              <select id="f-site"><option value="">— auswählen —</option></select>
-            </div>
-            <div class="field">
-              <label>Tenant<span class="opt">optional</span></label>
-              <select id="f-tenant"><option value="">— optional —</option></select>
-            </div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>Device Type<span class="req">*</span></label>
-              <select id="f-dtype" onchange="loadInterfaceTemplates()"><option value="">— auswählen —</option></select>
-            </div>
-            <div class="field">
-              <label>Device Role<span class="req">*</span></label>
-              <select id="f-role"><option value="">— auswählen —</option></select>
-            </div>
-          </div>
-          <div class="field" style="max-width:160px">
-            <label>Status</label>
-            <select id="f-status">
-              <option value="active">Active</option>
-              <option value="planned">Planned</option>
-              <option value="staged">Staged</option>
-              <option value="failed">Failed</option>
-              <option value="inventory">Inventory</option>
-              <option value="decommissioning">Decommissioning</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION: Interface & MAC -->
-      <div class="section">
-        <div class="section-head">
-          <div class="section-icon icon-iface">⇄</div>
-          <div class="section-title">Interface &amp; MAC</div>
-        </div>
-        <div class="section-body">
-          <div class="field">
-            <div class="field-label-row">
-              <label>Interface<span class="req">*</span></label>
-              <span id="iface-loading" style="display:none"><span class="spinner"></span></span>
-            </div>
-            <select id="f-iface" disabled>
-              <option value="">— zuerst Device Type wählen —</option>
-            </select>
-            <div class="hint-text" id="iface-hint" style="display:none"></div>
-          </div>
-          <div class="row-2">
-            <div class="field">
-              <label>MAC Adresse<span class="opt">optional</span></label>
-              <input type="text" id="f-mac" placeholder="AA:BB:CC:DD:EE:FF">
-            </div>
-            <div class="field">
-              <label>MAC Description<span class="opt">optional</span></label>
-              <input type="text" id="f-mac-desc" placeholder="z.B. Zutrittssystem XXXX">
-            </div>
-          </div>
-          <div id="cfgroup-wrap" style="display:none">
-            <div class="field">
-              <div class="field-label-row">
-                <label>MAC cf_group<span class="opt">optional</span></label>
-                <span id="cfgroup-loading" style="display:none"><span class="spinner"></span></span>
-              </div>
-              <select id="f-cfgroup"><option value="">— optional —</option></select>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION: IP / Netzwerk -->
-      <div class="section">
-        <div class="section-head">
-          <div class="section-icon icon-net">◈</div>
-          <div class="section-title">IP / Netzwerk</div>
-        </div>
-        <div class="section-body">
-          <div class="row-2">
-            <div class="field">
-              <label>IP Adresse / Prefix<span class="req">*</span></label>
-              <input type="text" id="f-ip" placeholder="192.168.1.1/24">
-            </div>
-            <div class="field">
-              <label>IP Status</label>
-              <select id="f-ipstatus">
-                <option value="active">Active</option>
-                <option value="reserved">Reserved</option>
-                <option value="dhcp">DHCP</option>
-                <option value="slaac">SLAAC</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label>VRF<span class="opt">optional</span></label>
-            <select id="f-vrf"><option value="">— optional —</option></select>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /form-scroll -->
-
-    <div class="form-footer">
-      <button class="btn-add" onclick="addToQueue()" id="btn-add" disabled>
-        + Zur Import-Queue hinzufügen
-      </button>
+```
+  <!-- SECTION: Gerät -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-device">⬡</div>
+      <div class="section-title">Gerät</div>
     </div>
+    <div class="section-body">
+      <div class="row-2">
+        <div class="field">
+          <label>Name<span class="req">*</span></label>
+          <input type="text" id="f-name" placeholder="z.B. SW-CORE-01">
+        </div>
+        <div class="field">
+          <label>Seriennummer<span class="opt">optional</span></label>
+          <input type="text" id="f-serial" placeholder="SN-123456">
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Site<span class="req">*</span></label>
+          <select id="f-site"><option value="">— auswählen —</option></select>
+        </div>
+        <div class="field">
+          <label>Tenant<span class="opt">optional</span></label>
+          <select id="f-tenant"><option value="">— optional —</option></select>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>Device Type<span class="req">*</span></label>
+          <select id="f-dtype" onchange="loadInterfaceTemplates()"><option value="">— auswählen —</option></select>
+        </div>
+        <div class="field">
+          <label>Device Role<span class="req">*</span></label>
+          <select id="f-role"><option value="">— auswählen —</option></select>
+        </div>
+      </div>
+      <div class="field" style="max-width:160px">
+        <label>Status</label>
+        <select id="f-status">
+          <option value="active">Active</option>
+          <option value="planned">Planned</option>
+          <option value="staged">Staged</option>
+          <option value="failed">Failed</option>
+          <option value="inventory">Inventory</option>
+          <option value="decommissioning">Decommissioning</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: Interface & MAC -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-iface">⇄</div>
+      <div class="section-title">Interface &amp; MAC</div>
+    </div>
+    <div class="section-body">
+      <div class="field">
+        <div class="field-label-row">
+          <label>Interface<span class="req">*</span></label>
+          <span id="iface-loading" style="display:none"><span class="spinner"></span></span>
+        </div>
+        <select id="f-iface" disabled>
+          <option value="">— zuerst Device Type wählen —</option>
+        </select>
+        <div class="hint-text" id="iface-hint" style="display:none"></div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label>MAC Adresse<span class="opt">optional</span></label>
+          <input type="text" id="f-mac" placeholder="AA:BB:CC:DD:EE:FF">
+        </div>
+        <div class="field">
+          <label>MAC Description<span class="opt">optional</span></label>
+          <input type="text" id="f-mac-desc" placeholder="z.B. Zutrittssystem TS31">
+        </div>
+      </div>
+      <div id="cfgroup-wrap" style="display:none">
+        <div class="field">
+          <div class="field-label-row">
+            <label>MAC cf_group<span class="opt">optional</span></label>
+            <span id="cfgroup-loading" style="display:none"><span class="spinner"></span></span>
+          </div>
+          <select id="f-cfgroup"><option value="">— optional —</option></select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION: IP / Netzwerk -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon icon-net">◈</div>
+      <div class="section-title">IP / Netzwerk</div>
+    </div>
+    <div class="section-body">
+      <div class="row-2">
+        <div class="field">
+          <label>IP Adresse / Prefix<span class="req">*</span></label>
+          <input type="text" id="f-ip" placeholder="192.168.1.1/24">
+        </div>
+        <div class="field">
+          <label>IP Status</label>
+          <select id="f-ipstatus">
+            <option value="active">Active</option>
+            <option value="reserved">Reserved</option>
+            <option value="dhcp">DHCP</option>
+            <option value="slaac">SLAAC</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>VRF<span class="opt">optional</span></label>
+        <select id="f-vrf"><option value="">— optional —</option></select>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /form-scroll -->
+
+<div class="form-footer">
+  <button class="btn-add" onclick="addToQueue()" id="btn-add" disabled>
+    + Zur Import-Queue hinzufügen
+  </button>
+</div>
+```
+
   </div><!-- /form-panel -->
 
   <!-- ── Right: Queue + Log ── -->
+
   <div class="right-panel">
     <div class="panel-tabs">
-      <div class="tab active" onclick="switchTab('queue')">Import Queue</div>
-      <div class="tab" onclick="switchTab('log')">Activity Log</div>
+      <div class="tab active" data-tab="queue" onclick="switchTab('queue')">Import Queue</div>
+      <div class="tab" data-tab="csv" onclick="switchTab('csv')">CSV Import</div>
+      <div class="tab" data-tab="log" onclick="switchTab('log')">Activity Log</div>
     </div>
 
-    <!-- Queue Tab -->
-    <div class="tab-content active" id="tab-queue">
-      <div class="queue-toolbar">
-        <div class="queue-toolbar-left">
-          <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--label)">Queue</span>
-          <span class="badge" id="queue-count">0 Geräte</span>
+```
+<!-- Queue Tab -->
+<div class="tab-content active" id="tab-queue">
+  <div class="queue-toolbar">
+    <div class="queue-toolbar-left">
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--label)">Queue</span>
+      <span class="badge" id="queue-count">0 Geräte</span>
+    </div>
+    <div class="toolbar-btns">
+      <button class="btn btn-sm btn-outline" onclick="clearQueue()">Leeren</button>
+      <button class="btn btn-sm btn-run" onclick="runImport()" id="btn-import" disabled>
+        <span id="import-spinner" style="display:none" class="spinner"></span>
+        Alle importieren
+      </button>
+    </div>
+  </div>
+
+  <div class="progress-wrap" id="progress-wrap">
+    <div class="progress-label" id="progress-label">0 / 0</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+  <div id="queue-list">
+    <div class="empty-state">Keine Geräte in der Queue.<br>Formular ausfüllen und hinzufügen.</div>
+  </div>
+</div>
+
+<!-- CSV Tab -->
+<div class="tab-content" id="tab-csv">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <div>
+      <div style="font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:var(--text)">CSV Bulk Import</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">Mehrere Geräte auf einmal importieren</div>
+    </div>
+    <button class="btn btn-sm btn-outline" onclick="downloadTemplate()">⬇ Template herunterladen</button>
+  </div>
+
+  <!-- Drop Zone -->
+  <div id="csv-dropzone"
+    style="border:2px dashed var(--border2);border-radius:var(--radius);padding:32px;text-align:center;
+           cursor:pointer;transition:all .2s;font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted)"
+    onclick="document.getElementById('csv-file').click()"
+    ondragover="csvDragOver(event)" ondragleave="csvDragLeave(event)" ondrop="csvDrop(event)">
+    <div style="font-size:28px;margin-bottom:8px">📂</div>
+    <div style="color:var(--label)">CSV-Datei hier ablegen</div>
+    <div style="font-size:10px;margin-top:4px">oder klicken zum Auswählen</div>
+    <input type="file" id="csv-file" accept=".csv" style="display:none" onchange="csvFileSelected(event)">
+  </div>
+
+  <!-- Preview -->
+  <div id="csv-preview" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--label)" id="csv-info"></span>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-outline" onclick="csvClear()">Verwerfen</button>
+        <button class="btn btn-sm btn-run" onclick="csvAddToQueue()" id="btn-csv-add">Alle zur Queue hinzufügen</button>
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table id="csv-table" style="width:100%;border-collapse:collapse;font-family:'Geist Mono',monospace;font-size:10px"></table>
+    </div>
+  </div>
+
+  <!-- Format Info -->
+  <div class="section" style="margin-top:4px">
+    <div class="section-head">
+      <div class="section-title">CSV Spalten</div>
+    </div>
+    <div class="section-body" style="gap:6px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">name*</span> <span style="color:var(--muted)">Gerätename</span></div>
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">site*</span> <span style="color:var(--muted)">Site Name</span></div>
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">device_type*</span> <span style="color:var(--muted)">Model (exakt)</span></div>
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">device_role*</span> <span style="color:var(--muted)">Role Name</span></div>
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">interface*</span> <span style="color:var(--muted)">Interface Name</span></div>
+          <div><span style="color:var(--red);font-family:'Geist Mono',monospace">ip*</span> <span style="color:var(--muted)">IP/Prefix (x.x.x.x/yy)</span></div>
         </div>
-        <div class="toolbar-btns">
-          <button class="btn btn-sm btn-outline" onclick="clearQueue()">Leeren</button>
-          <button class="btn btn-sm btn-run" onclick="runImport()" id="btn-import" disabled>
-            <span id="import-spinner" style="display:none" class="spinner"></span>
-            Alle importieren
-          </button>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">serial</span> <span style="color:var(--muted)">Seriennummer</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">tenant</span> <span style="color:var(--muted)">Tenant Name</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">status</span> <span style="color:var(--muted)">active/planned/staged…</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">mac</span> <span style="color:var(--muted)">MAC Adresse</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">mac_description</span> <span style="color:var(--muted)">MAC Beschreibung</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">cf_group</span> <span style="color:var(--muted)">CF Group Value</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">ip_status</span> <span style="color:var(--muted)">active/reserved/dhcp…</span></div>
+          <div><span style="color:var(--label);font-family:'Geist Mono',monospace">vrf</span> <span style="color:var(--muted)">VRF Name</span></div>
         </div>
       </div>
-
-      <div class="progress-wrap" id="progress-wrap">
-        <div class="progress-label" id="progress-label">0 / 0</div>
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
-      </div>
-
-      <div id="queue-list">
-        <div class="empty-state">Keine Geräte in der Queue.<br>Formular ausfüllen und hinzufügen.</div>
-      </div>
     </div>
+  </div>
+</div>
 
-    <!-- Log Tab -->
-    <div class="tab-content" id="tab-log">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--label)">Activity Log</span>
-        <button class="btn btn-sm btn-outline" onclick="clearLog()">Leeren</button>
-      </div>
-      <div id="log-output"></div>
-    </div>
+<!-- Log Tab -->
+<div class="tab-content" id="tab-log">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+    <span style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--label)">Activity Log</span>
+    <button class="btn btn-sm btn-outline" onclick="clearLog()">Leeren</button>
+  </div>
+  <div id="log-output"></div>
+</div>
+```
+
   </div>
 
 </div><!-- /workspace -->
@@ -1044,8 +1154,11 @@ function clearLog() { document.getElementById('log-output').innerHTML = ''; }
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.tab[onclick*="${name}"]`).classList.add('active');
   document.getElementById(`tab-${name}`).classList.add('active');
+  // Aktiven Tab-Button per data-Attribut finden
+  document.querySelectorAll('.tab').forEach(t => {
+    if (t.dataset.tab === name) t.classList.add('active');
+  });
 }
 
 // ─── UI Helpers ───────────────────────────────────────────────────────────────
@@ -1075,6 +1188,222 @@ function isValidMAC(mac) {
   return /^([0-9A-Fa-f]{2}[:\-]){5}[0-9A-Fa-f]{2}$/.test(mac);
 }
 
+// ─── CSV Import ───────────────────────────────────────────────────────────────
+const CSV_COLS = ['name','site','device_type','device_role','interface','ip','serial','tenant','status','mac','mac_description','cf_group','ip_status','vrf'];
+const CSV_REQUIRED = ['name','site','device_type','device_role','interface','ip'];
+
+function downloadTemplate() {
+  const header = CSV_COLS.join(',');
+  const example = [
+    'SW-CORE-01','HQ Staging','CMe3000','SPS','eth0','10.1.1.1/24',
+    'SN-12345','vTHPOT','active','AA:BB:CC:DD:EE:FF','Beschreibung',
+    'G_FRA.TB.VL0050.FW.OT','active','vTHPOT'
+  ].join(',');
+  const csv = header + '
+' + example + '
+';
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'netbox-importer-template.csv';
+  a.click();
+  log('CSV Template heruntergeladen', 'ok');
+}
+
+let csvRows = [];
+
+function csvDragOver(e) {
+  e.preventDefault();
+  document.getElementById('csv-dropzone').classList.add('drag-over');
+}
+function csvDragLeave(e) {
+  document.getElementById('csv-dropzone').classList.remove('drag-over');
+}
+function csvDrop(e) {
+  e.preventDefault();
+  document.getElementById('csv-dropzone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) parseCSV(file);
+}
+function csvFileSelected(e) {
+  const file = e.target.files[0];
+  if (file) parseCSV(file);
+}
+
+function parseCSV(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const lines = e.target.result.replace(/
+/g,'
+').replace(/
+/g,'
+').split('
+').filter(l => l.trim());
+    if (lines.length < 2) { showToast('CSV leer oder ungültig', 'err'); return; }
+
+    // Header parsen
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase().replace(/[^a-z_]/g,''));
+    log(`CSV: Spalten erkannt: ${headers.join(', ')}`, 'info');
+
+    // Pflichtfelder prüfen
+    const missing = CSV_REQUIRED.filter(r => !headers.includes(r));
+    if (missing.length) {
+      showToast(`Fehlende Pflichtfelder: ${missing.join(', ')}`, 'err');
+      log(`CSV Fehler: Pflichtfelder fehlen: ${missing.join(', ')}`, 'err');
+      return;
+    }
+
+    csvRows = [];
+    const errors = [];
+    for (let i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      // Simple CSV parse (handles basic cases)
+      const vals = parseCSVLine(lines[i]);
+      const row = {};
+      headers.forEach((h, idx) => { row[h] = (vals[idx] || '').trim(); });
+
+      // Validate required
+      const rowMissing = CSV_REQUIRED.filter(r => !row[r]);
+      row._line = i + 1;
+      row._errors = rowMissing.length ? rowMissing.map(r => `"${r}" fehlt`) : [];
+      csvRows.push(row);
+      if (row._errors.length) errors.push(i);
+    }
+
+    renderCSVPreview(headers);
+    document.getElementById('csv-preview').style.display = '';
+    document.getElementById('csv-dropzone').style.display = 'none';
+    document.getElementById('csv-info').textContent =
+      `${csvRows.length} Zeilen geladen${errors.length ? ' · ' + errors.length + ' mit Fehlern' : ''}`;
+    log(`CSV geladen: ${csvRows.length} Zeilen, ${errors.length} Fehler`, errors.length ? 'warn' : 'ok');
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+function parseCSVLine(line) {
+  const result = [];
+  let cur = '', inQ = false;
+  for (let c of line) {
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { result.push(cur); cur = ''; }
+    else cur += c;
+  }
+  result.push(cur);
+  return result;
+}
+
+function renderCSVPreview(headers) {
+  const displayCols = headers.filter(h => !h.startsWith('_'));
+  const table = document.getElementById('csv-table');
+  table.innerHTML = '<thead><tr><th>#</th>' +
+    displayCols.map(h => `<th>${esc(h)}</th>`).join('') +
+    '<th>Status</th></tr></thead>' +
+    '<tbody>' + csvRows.map(row => {
+      const cls = row._errors.length ? 'csv-err' : '';
+      return `<tr class="${cls}">
+        <td>${row._line}</td>
+        ${displayCols.map(h => `<td>${esc(row[h]||'')}</td>`).join('')}
+        <td>${row._errors.length ? '✗ '+row._errors.join(', ') : '✓'}</td>
+      </tr>`;
+    }).join('') + '</tbody>';
+}
+
+function csvClear() {
+  csvRows = [];
+  document.getElementById('csv-preview').style.display = 'none';
+  document.getElementById('csv-dropzone').style.display = '';
+  document.getElementById('csv-file').value = '';
+}
+
+async function csvAddToQueue() {
+  if (!connected) { showToast('Zuerst verbinden', 'err'); return; }
+
+  const valid = csvRows.filter(r => !r._errors.length);
+  if (!valid.length) { showToast('Keine gültigen Zeilen', 'err'); return; }
+
+  // Lookup maps aus NetBox bauen
+  log('CSV: Löse Namen auf…', 'info');
+  let added = 0, skipped = 0;
+
+  for (const row of valid) {
+    try {
+      // Site ID
+      const siteRes = await nbFetch(`/api/dcim/sites/?name=${encodeURIComponent(row.site)}&limit=1`);
+      if (!siteRes.results.length) throw new Error(`Site "${row.site}" nicht gefunden`);
+      const siteId = siteRes.results[0].id;
+      const siteName = siteRes.results[0].name;
+
+      // Device Type ID
+      const dtRes = await nbFetch(`/api/dcim/device-types/?model=${encodeURIComponent(row.device_type)}&limit=1`);
+      if (!dtRes.results.length) throw new Error(`Device Type "${row.device_type}" nicht gefunden`);
+      const dtId = dtRes.results[0].id;
+      const dtName = `${dtRes.results[0].manufacturer.name} – ${dtRes.results[0].model}`;
+
+      // Role ID
+      const roleRes = await nbFetch(`/api/dcim/device-roles/?name=${encodeURIComponent(row.device_role)}&limit=1`);
+      if (!roleRes.results.length) throw new Error(`Device Role "${row.device_role}" nicht gefunden`);
+      const roleId = roleRes.results[0].id;
+      const roleName = roleRes.results[0].name;
+
+      // Tenant ID (optional)
+      let tenantId = '', tenantName = '';
+      if (row.tenant) {
+        const tRes = await nbFetch(`/api/tenancy/tenants/?name=${encodeURIComponent(row.tenant)}&limit=1`);
+        if (tRes.results.length) { tenantId = tRes.results[0].id; tenantName = tRes.results[0].name; }
+        else log(`CSV Warnung: Tenant "${row.tenant}" nicht gefunden`, 'warn');
+      }
+
+      // VRF ID (optional)
+      let vrfId = '', vrfName = '';
+      if (row.vrf) {
+        const vRes = await nbFetch(`/api/ipam/vrfs/?name=${encodeURIComponent(row.vrf)}&limit=1`);
+        if (vRes.results.length) { vrfId = vRes.results[0].id; vrfName = vRes.results[0].name; }
+        else log(`CSV Warnung: VRF "${row.vrf}" nicht gefunden`, 'warn');
+      }
+
+      // cf_group key
+      const cfGroupKey = document.getElementById('f-cfgroup').dataset.cfkey || 'group';
+
+      const item = {
+        id:         Date.now() + Math.random(),
+        name:       row.name,
+        site:       String(siteId),   siteName,
+        dtype:      String(dtId),     dtName,
+        role:       String(roleId),   roleName,
+        tenant:     String(tenantId), tenantName,
+        serial:     row.serial || '',
+        status:     row.status || 'active',
+        iface:      row.interface,
+        ifaceType:  '1000base-t',
+        mac:        row.mac || '',
+        macDesc:    row.mac_description || '',
+        cfGroup:    row.cf_group || '',
+        cfGroupKey,
+        ip:         row.ip,
+        ipStatus:   row.ip_status || 'active',
+        vrf:        String(vrfId),    vrfName,
+        state:      'pending',
+        error:      null,
+      };
+
+      queue.push(item);
+      added++;
+      log(`  ✓ "${row.name}" zur Queue hinzugefügt`, 'ok');
+    } catch(e) {
+      skipped++;
+      log(`  ✗ Zeile ${row._line} "${row.name}": ${e.message}`, 'err');
+    }
+  }
+
+  renderQueue();
+  updateImportBtn();
+  showToast(`${added} Geräte zur Queue hinzugefügt${skipped ? ', '+skipped+' übersprungen' : ''}`, skipped ? 'err' : 'ok');
+  if (added) {
+    csvClear();
+    switchTab('queue');
+  }
+}
+
 // ─── Theme ────────────────────────────────────────────────────────────────────
 function toggleTheme() {
   const isLight = document.documentElement.classList.toggle('light');
@@ -1098,5 +1427,6 @@ log('NetBox Device Importer bereit.', 'info');
 log('NetBox URL und Token eingeben, dann "Verbindung testen".', 'info');
 
 </script>
+
 </body>
 </html>
