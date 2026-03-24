@@ -1184,9 +1184,7 @@ function downloadTemplate() {
     'SN-12345','vTHPOT','active','AA:BB:CC:DD:EE:FF','Beschreibung',
     'G_FRA.TB.VL0050.FW.OT','active','vTHPOT'
   ].join(',');
-  const csv = header + '
-' + example + '
-';
+  const csv = header + '\n' + example + '\n';
   const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -1218,12 +1216,7 @@ function csvFileSelected(e) {
 function parseCSV(file) {
   const reader = new FileReader();
   reader.onload = function(e) {
-    const lines = e.target.result.replace(/
-/g,'
-').replace(/
-/g,'
-').split('
-').filter(l => l.trim());
+    const lines = e.target.result.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n').filter(l => l.trim());
     if (lines.length < 2) { showToast('CSV leer oder ungültig', 'err'); return; }
 
     // Header parsen
