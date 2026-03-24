@@ -310,6 +310,8 @@ select option{background:var(--surface2)}
 .queue-item.success{border-color:#1a5c37;background:#050f09}
 .queue-item.error  {border-color:#5c1a1a;background:#0f0505}
 .queue-item.running{border-color:var(--blue);background:#050f1a}
+.queue-item.ip-conflict{border-color:#c04040;background:#1a0808}
+:root.light .queue-item.ip-conflict{border-color:#d94f4f;background:#fff0f0}
 .queue-name{font-family:'Geist Mono',monospace;font-size:12px;font-weight:600;color:var(--text)}
 .queue-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
 .queue-tag{
@@ -531,9 +533,43 @@ select option{background:var(--surface2)}
         <div class="section-body">
           <div class="row-2">
             <div class="field">
-              <label>IP Adresse / Prefix<span class="req">*</span></label>
-              <input type="text" id="f-ip" placeholder="192.168.1.1/24">
+              <label>IP Adresse<span class="req">*</span></label>
+              <input type="text" id="f-ip-addr" placeholder="192.168.1.1" oninput="updateIPPreview()">
             </div>
+            <div class="field">
+              <label>Subnetzmaske / Prefix<span class="req">*</span></label>
+              <div style="display:flex;gap:6px">
+                <input type="text" id="f-ip-mask" placeholder="255.255.255.0" oninput="onMaskInput()" style="flex:1">
+                <select id="f-ip-cidr" onchange="onCidrChange()" style="width:72px">
+                  <option value="">/–</option>
+                  <option value="32">/32</option>
+                  <option value="31">/31</option>
+                  <option value="30">/30</option>
+                  <option value="29">/29</option>
+                  <option value="28">/28</option>
+                  <option value="27">/27</option>
+                  <option value="26">/26</option>
+                  <option value="25">/25</option>
+                  <option value="24">/24</option>
+                  <option value="23">/23</option>
+                  <option value="22">/22</option>
+                  <option value="21">/21</option>
+                  <option value="20">/20</option>
+                  <option value="19">/19</option>
+                  <option value="18">/18</option>
+                  <option value="17">/17</option>
+                  <option value="16">/16</option>
+                  <option value="15">/15</option>
+                  <option value="14">/14</option>
+                  <option value="13">/13</option>
+                  <option value="12">/12</option>
+                  <option value="8">/8</option>
+                </select>
+              </div>
+              <div id="ip-preview" class="hint-text" style="display:none;color:var(--accent)"></div>
+            </div>
+          </div>
+          <div class="row-2">
             <div class="field">
               <label>IP Status</label>
               <select id="f-ipstatus">
@@ -543,6 +579,7 @@ select option{background:var(--surface2)}
                 <option value="slaac">SLAAC</option>
               </select>
             </div>
+            <div></div>
           </div>
           <div class="field">
             <label>VRF<span class="opt">optional</span></label>
@@ -701,6 +738,18 @@ async function nbFetch(path, method = 'GET', body = null) {
 }
 
 // ─── Connection ───────────────────────────────────────────────────────────────
+function diagnoseNetworkError(url) {
+  if (!url || url === window.location.origin) {
+    return 'Netzwerkfehler: Server nicht erreichbar. Läuft NetBox?';
+  }
+  if (url.startsWith('https://') && (url.includes('192.168.') || url.includes('10.') || url.includes('172.'))) {
+    return `Netzwerkfehler: SSL-Zertifikat möglicherweise nicht akzeptiert. `
+      + `Öffne zuerst ${url} im Browser und akzeptiere das Zertifikat, dann erneut versuchen.`;
+  }
+  return `Netzwerkfehler: "${url}" nicht erreichbar. `
+    + `Prüfe URL, CORS-Einstellungen und ob der Server läuft.`;
+}
+
 async function testConnection() {
   const rawUrl = document.getElementById('nb-url').value.trim();
   // Wenn leer: gleiche Origin verwenden (kein CORS wenn auf NetBox-Server gehostet)
@@ -714,24 +763,44 @@ async function testConnection() {
   setBadge('', 'Anmelden…');
 
   try {
-    // Token via NetBox login provisioning holen
-    log(`→ Authentifiziere "${user}" gegen ${nbUrl || 'diese Seite'}…`, 'info');
-    const res = await fetch(nbUrl.replace(/\/$/, '') + '/api/users/tokens/provision/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ username: user, password: pass }),
-    });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.detail || err.non_field_errors?.[0] || `HTTP ${res.status}`);
-    }
-    const data = await res.json();
-    nbToken = data.key;
-    // Passwort-Feld leeren
-    document.getElementById('nb-pass').value = '';
-    log(`  Token erhalten (${nbToken.substring(0,8)}…)`, 'ok');
+    const base = nbUrl.replace(/\/$/, '');
+    log(`→ Authentifiziere "${user}" gegen ${base || window.location.origin}…`, 'info');
 
-    // Verbindung verifizieren
+    // Versuch 1: tokens/provision (NetBox 3.4+)
+    let tokenKey = null;
+    try {
+      const res = await fetch(base + '/api/users/tokens/provision/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ username: user, password: pass }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        tokenKey = data.key;
+        log(`  Token via provision erhalten`, 'ok');
+      } else if (res.status === 403 || res.status === 401) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || err.non_field_errors?.[0] || `Falsches Passwort (HTTP ${res.status})`);
+      } else {
+        log(`  /tokens/provision HTTP ${res.status} – versuche Login-Endpoint…`, 'warn');
+      }
+    } catch(e1) {
+      if (e1.message.includes('fetch') || e1.message.includes('network') || e1.message.toLowerCase().includes('failed')) {
+        // Netzwerkfehler – direkt weiterwerfen mit hilfreicher Meldung
+        throw new Error(diagnoseNetworkError(base));
+      }
+      if (e1.message.includes('Falsches') || e1.message.includes('HTTP 4')) throw e1;
+      log(`  provision fehlgeschlagen: ${e1.message}`, 'warn');
+    }
+
+    if (!tokenKey) {
+      throw new Error('Kein Token erhalten – prüfe Benutzername/Passwort und NetBox-Version');
+    }
+
+    nbToken = tokenKey;
+    document.getElementById('nb-pass').value = '';
+    log(`  Token: ${nbToken.substring(0,8)}…`, 'info');
+
     await nbFetch('/api/status/');
     connected = true;
     setBadge('ok', user);
@@ -744,7 +813,7 @@ async function testConnection() {
     nbToken = '';
     setBadge('err', 'Fehler');
     log('Anmeldung fehlgeschlagen: ' + e.message, 'err');
-    showToast('Anmeldung fehlgeschlagen: ' + e.message, 'err');
+    showToast('Fehler: ' + e.message, 'err');
   } finally { sp.style.display = 'none'; }
 }
 
@@ -888,7 +957,77 @@ async function loadInterfaceTemplates() {
 }
 
 
-function addToQueue() {
+// ─── IP Helpers ───────────────────────────────────────────────────────────────
+const CIDR_TO_MASK = {
+  32:'255.255.255.255', 31:'255.255.255.254', 30:'255.255.255.252',
+  29:'255.255.255.248', 28:'255.255.255.240', 27:'255.255.255.224',
+  26:'255.255.255.192', 25:'255.255.255.128', 24:'255.255.255.0',
+  23:'255.255.254.0',   22:'255.255.252.0',   21:'255.255.248.0',
+  20:'255.255.240.0',   19:'255.255.224.0',   18:'255.255.192.0',
+  17:'255.255.128.0',   16:'255.255.0.0',     15:'255.254.0.0',
+  14:'255.252.0.0',     13:'255.248.0.0',     12:'255.240.0.0',
+  8:'255.0.0.0',
+};
+const MASK_TO_CIDR = Object.fromEntries(Object.entries(CIDR_TO_MASK).map(([k,v])=>[v,parseInt(k)]));
+
+function maskToCidr(mask) {
+  if (MASK_TO_CIDR[mask] !== undefined) return MASK_TO_CIDR[mask];
+  try {
+    const parts = mask.split('.').map(Number);
+    if (parts.length !== 4) return null;
+    let bits = 0;
+    for (const p of parts) {
+      if (p < 0 || p > 255) return null;
+      bits += p.toString(2).replace(/0/g,'').length;
+    }
+    return bits;
+  } catch { return null; }
+}
+
+function onMaskInput() {
+  const mask = document.getElementById('f-ip-mask').value.trim();
+  const cidr = maskToCidr(mask);
+  const sel = document.getElementById('f-ip-cidr');
+  if (cidr !== null) {
+    for (const opt of sel.options) {
+      if (opt.value === String(cidr)) { sel.value = String(cidr); break; }
+    }
+  }
+  updateIPPreview();
+}
+
+function onCidrChange() {
+  const cidr = document.getElementById('f-ip-cidr').value;
+  if (cidr && CIDR_TO_MASK[cidr]) {
+    document.getElementById('f-ip-mask').value = CIDR_TO_MASK[cidr];
+  }
+  updateIPPreview();
+}
+
+function buildIP() {
+  const addr = document.getElementById('f-ip-addr').value.trim();
+  const cidr = document.getElementById('f-ip-cidr').value;
+  if (!addr || !cidr) return '';
+  return addr + '/' + cidr;
+}
+
+function updateIPPreview() {
+  const ip = buildIP();
+  const el = document.getElementById('ip-preview');
+  if (ip && isValidIP(ip)) {
+    el.textContent = '\u2192 ' + ip;
+    el.style.display = '';
+    el.style.color = 'var(--accent)';
+  } else if (ip) {
+    el.textContent = '\u2192 ' + ip;
+    el.style.display = '';
+    el.style.color = 'var(--red)';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+async function addToQueue() {
   const get = id => document.getElementById(id).value.trim();
   const getName = id => { const s = document.getElementById(id); return s.options[s.selectedIndex]?.text || ''; };
 
@@ -915,7 +1054,7 @@ function addToQueue() {
     cfGroup:    get('f-cfgroup'),
     cfGroupKey: document.getElementById('f-cfgroup').dataset.cfkey || 'group',
     macDesc:    get('f-mac-desc'),
-    ip:         get('f-ip'),
+    ip:         buildIP(),
     ipStatus:   get('f-ipstatus'),
     vrf:        get('f-vrf'),
     vrfName:    getName('f-vrf'),
@@ -927,13 +1066,52 @@ function addToQueue() {
     showToast('Pflichtfelder ausfüllen: Name, Site, Type, Role, Interface, IP', 'err');
     return;
   }
-  if (!isValidIP(item.ip)) { showToast('Ungültige IP (Format: x.x.x.x/xx)', 'err'); return; }
+  if (!item.ip) { showToast('IP Adresse und Subnetzmaske/Prefix eingeben', 'err'); return; }
+  if (!isValidIP(item.ip)) { showToast('Ungültige IP oder Maske', 'err'); return; }
+  // Warnen falls gleiche IP bereits in der Queue
+  const dupInQueue = queue.find(q => q.ip === item.ip && q.state !== 'error');
+  if (dupInQueue) {
+    showToast(`⚠ IP "${item.ip}" ist bereits in der Queue (${dupInQueue.name})`, 'err');
+    return;
+  }
   if (item.mac && !isValidMAC(item.mac)) { showToast('Ungültige MAC (Format: AA:BB:CC:DD:EE:FF)', 'err'); return; }
+
+  // NetBox-Check: IP bereits vorhanden?
+  if (connected) {
+    const btnAdd = document.getElementById('btn-add');
+    btnAdd.disabled = true;
+    btnAdd.textContent = 'Prüfe IP…';
+    try {
+      const ipCheck = await nbFetch(`/api/ipam/ip-addresses/?address=${encodeURIComponent(item.ip)}&limit=5`);
+      if (ipCheck.results && ipCheck.results.length > 0) {
+        const ex = ipCheck.results[0];
+        const assignedTo = ex.assigned_object
+          ? (ex.assigned_object.device?.name || ex.assigned_object.virtual_machine?.name || '')
+          : '';
+        item._ipWarning = assignedTo
+          ? `IP bereits vergeben an: ${assignedTo}`
+          : `IP existiert bereits in NetBox (nicht zugewiesen)`;
+        item._ipExists = true;
+        log(`⚠ ${item._ipWarning}`, 'warn');
+      } else {
+        item._ipExists = false;
+        log(`✓ IP "${item.ip}" ist frei`, 'ok');
+      }
+    } catch(e) {
+      log(`IP-Prüfung fehlgeschlagen: ${e.message}`, 'warn');
+    } finally {
+      btnAdd.disabled = false;
+      btnAdd.textContent = '+ Zur Import-Queue hinzufügen';
+    }
+  }
 
   queue.push(item);
   renderQueue();
   updateImportBtn();
-  showToast(`"${item.name}" zur Queue hinzugefügt`, 'ok');
+  showToast(
+    item._ipExists ? `⚠ "${item.name}" hinzugefügt – IP bereits vergeben!` : `"${item.name}" zur Queue hinzugefügt`,
+    item._ipExists ? 'err' : 'ok'
+  );
   document.getElementById('f-name').value = '';
   document.getElementById('f-mac').value  = '';
   document.getElementById('f-ip').value   = '';
@@ -962,7 +1140,7 @@ function renderQueue() {
     return;
   }
   el.innerHTML = queue.map(i => `
-    <div class="queue-item ${i.state}" id="qi-${i.id}">
+    <div class="queue-item ${i.state}${i._ipExists ? ' ip-conflict' : ''}" id="qi-${i.id}">
       <div>
         <div class="queue-name">${esc(i.name)}</div>
         <div class="queue-tags">
@@ -975,6 +1153,8 @@ function renderQueue() {
           ${i.mac     ? `<span class="queue-tag tag-mac">${esc(i.mac)}${i.cfGroup ? ' · '+esc(i.cfGroup) : ''}</span>` : ''}
           <span class="queue-tag tag-ip">${esc(i.ip)}${i.vrfName ? ' · '+esc(i.vrfName) : ''}</span>
         </div>
+        ${i._ipWarning ? `<div class="queue-err" style="color:var(--amber)">⚠ ${esc(i._ipWarning)}</div>` : ''}
+        ${i._ipWarning ? `<div class="queue-err" style="color:var(--amber)">⚠ ${esc(i._ipWarning)}</div>` : ''}
         ${i.error ? `<div class="queue-err">✗ ${esc(i.error)}</div>` : ''}
       </div>
       <div class="queue-right">
@@ -1098,19 +1278,50 @@ async function importDevice(item) {
     }
   }
 
-  // 3. IP Adresse erstellen
-  log(`→ Erstelle IP "${item.ip}"…`, 'info');
-  const ipBody = {
-    address:              item.ip,
-    status:               item.ipStatus,
-    assigned_object_type: 'dcim.interface',
-    assigned_object_id:   ifaceId,
-  };
-  if (item.tenant) ipBody.tenant = parseInt(item.tenant);
-  if (item.vrf)    ipBody.vrf    = parseInt(item.vrf);
-  const ipObj = await nbFetch('/api/ipam/ip-addresses/', 'POST', ipBody);
-  const ipId = ipObj.id;
-  log(`  IP ID: ${ipId}`, 'info');
+  // 3. IP Adresse prüfen ob bereits vorhanden
+  log(`→ Prüfe ob IP "${item.ip}" bereits existiert…`, 'info');
+  const ipCheck = await nbFetch(`/api/ipam/ip-addresses/?address=${encodeURIComponent(item.ip)}&limit=5`);
+
+  let ipId;
+  if (ipCheck.results && ipCheck.results.length > 0) {
+    const existing = ipCheck.results[0];
+    const assignedTo = existing.assigned_object
+      ? ` (zugewiesen an: ${existing.assigned_object.name || existing.assigned_object_id})`
+      : ' (nicht zugewiesen)';
+    log(`  ⚠ IP "${item.ip}" existiert bereits (ID: ${existing.id})${assignedTo}`, 'warn');
+
+    if (existing.assigned_object_id && existing.assigned_object_id !== ifaceId) {
+      // IP ist bereits einem anderen Interface zugewiesen → Fehler
+      throw new Error(`IP "${item.ip}" ist bereits einem anderen Interface zugewiesen${assignedTo}`);
+    }
+
+    // IP existiert aber nicht zugewiesen oder gehört diesem Interface → wiederverwenden + patchen
+    ipId = existing.id;
+    log(`  IP wird wiederverwendet und aktualisiert…`, 'info');
+    const patchBody = {
+      status:               item.ipStatus,
+      assigned_object_type: 'dcim.interface',
+      assigned_object_id:   ifaceId,
+    };
+    if (item.tenant) patchBody.tenant = parseInt(item.tenant);
+    if (item.vrf)    patchBody.vrf    = parseInt(item.vrf);
+    await nbFetch(`/api/ipam/ip-addresses/${ipId}/`, 'PATCH', patchBody);
+    log(`  IP aktualisiert (ID: ${ipId})`, 'ok');
+  } else {
+    // IP existiert nicht → neu erstellen
+    log(`  IP ist frei, wird erstellt…`, 'info');
+    const ipBody = {
+      address:              item.ip,
+      status:               item.ipStatus,
+      assigned_object_type: 'dcim.interface',
+      assigned_object_id:   ifaceId,
+    };
+    if (item.tenant) ipBody.tenant = parseInt(item.tenant);
+    if (item.vrf)    ipBody.vrf    = parseInt(item.vrf);
+    const ipObj = await nbFetch('/api/ipam/ip-addresses/', 'POST', ipBody);
+    ipId = ipObj.id;
+    log(`  IP erstellt (ID: ${ipId})`, 'ok');
+  }
 
   // 4. Primary IP setzen
   log(`→ Setze Primary IP…`, 'info');
